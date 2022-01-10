@@ -1,3 +1,3 @@
 # SVR_Project
 
-Developed with Unreal Engine 4
+VR Game for SVR studies project.
