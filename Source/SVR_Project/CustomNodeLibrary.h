@@ -15,5 +15,5 @@ class SVR_PROJECT_API UCustomNodes : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
-	static UClass* GetRandomizedActor(const TArray<UClass*> actors, const TArray<float> weights);
+	static UClass* GetRandomizedActor(const TArray<UClass*> actors, const TArray<int32> chances);
 };
