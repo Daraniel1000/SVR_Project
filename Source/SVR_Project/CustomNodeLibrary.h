@@ -16,4 +16,6 @@ class SVR_PROJECT_API UCustomNodes : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
 	static UClass* GetRandomizedActor(const TArray<UClass*> actors, const TArray<int32> chances);
+	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
+	static void SpawnHarderEnemies(const TArray<int32> chances);
 };

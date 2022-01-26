@@ -17,3 +17,9 @@ UClass* UCustomNodes::GetRandomizedActor(const TArray<UClass*> actors, const TAr
 	}
 	return actors[i];
 }
+
+void UCustomNodes::SpawnHarderEnemies(TArray<int32> chances)
+{
+	chances[0] = std::max(chances[0] - 5, 0);
+	chances[1] = chances[1] + 5;
+}
