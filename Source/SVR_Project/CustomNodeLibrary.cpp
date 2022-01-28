@@ -23,3 +23,13 @@ void UCustomNodes::SpawnHarderEnemies(TArray<int32> chances)
 	chances[0] = std::max(chances[0] - 5, 0);
 	chances[1] = chances[1] + 5;
 }
+
+float UCustomNodes::GetSpawnRate()
+{
+	return 30.0;
+}
+
+int32 UCustomNodes::GetSpawnAmount()
+{
+	return 2;
+}
