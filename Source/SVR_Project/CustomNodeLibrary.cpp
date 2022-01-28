@@ -33,3 +33,13 @@ int32 UCustomNodes::GetSpawnAmount()
 {
 	return 2;
 }
+
+int32 UCustomNodes::GetPlayerPulse()
+{
+	time_t rawtime;
+	struct tm timeinfo;
+	time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+
+	return timeinfo.tm_sec;
+}

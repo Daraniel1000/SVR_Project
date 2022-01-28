@@ -25,4 +25,7 @@ class SVR_PROJECT_API UCustomNodes : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
 	static int32 GetSpawnAmount();
+
+	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
+	static int32 GetPlayerPulse();
 };
