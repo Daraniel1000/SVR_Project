@@ -24,14 +24,14 @@ void UCustomNodes::SpawnHarderEnemies(TArray<int32> chances)
 	chances[1] = chances[1] + 5;
 }
 
-float UCustomNodes::GetSpawnRate()
+float UCustomNodes::GetSpawnRate(int32 pulse)
 {
-	return 30.0;
+	return 3 + pulse / 5;
 }
 
-int32 UCustomNodes::GetSpawnAmount()
+int32 UCustomNodes::GetSpawnAmount(int32 pulse)
 {
-	return 2;
+	return 1;
 }
 
 int32 UCustomNodes::GetPlayerPulse()

@@ -21,10 +21,10 @@ class SVR_PROJECT_API UCustomNodes : public UBlueprintFunctionLibrary
 	static void SpawnHarderEnemies(const TArray<int32> chances);
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
-	static float GetSpawnRate();
+	static float GetSpawnRate(int32 pulse);
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
-	static int32 GetSpawnAmount();
+	static int32 GetSpawnAmount(int32 pulse);
 
 	UFUNCTION(BlueprintCallable, Category = "Custom Nodes")
 	static int32 GetPlayerPulse();
