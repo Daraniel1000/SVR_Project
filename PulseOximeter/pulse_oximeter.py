@@ -1,16 +1,25 @@
+import math
 import sys
 import threading
 import time
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import *
 
 
-pulse = 123
+MIN_PULSE = 70
+MAX_PULSE = 170
+FREQUENCY = 0.04
+SERVER_NAME = "localhost"
+SERVER_PORT = 8080
 
 
-class App(QMainWindow):
+pulse = MIN_PULSE
+
+
+class GUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Pulse oximeter")
@@ -31,8 +40,8 @@ class App(QMainWindow):
 
         self.slider = QSlider(Qt.Orientation.Horizontal, self)
         self.slider.setFixedWidth(120)
-        self.slider.setMinimum(50)
-        self.slider.setMaximum(150)
+        self.slider.setMinimum(MIN_PULSE)
+        self.slider.setMaximum(MAX_PULSE)
         self.slider.valueChanged.connect(self.changed_value)
         layout.addWidget(self.slider, 1, 0)
 
@@ -56,8 +65,8 @@ class App(QMainWindow):
 
     def sinusoid(self):
         while True:
-            value = time.time() % 60
-            value = int(value / 60 * 100 + 50)
+            factor = (MAX_PULSE - MIN_PULSE) / 2
+            value = int(factor * math.sin(FREQUENCY * time.time()) + factor + MIN_PULSE)
 
             self.slider.setValue(value)
             self.label.setText(str(value))
@@ -65,22 +74,22 @@ class App(QMainWindow):
             global pulse
             pulse = value
 
-            time.sleep(0.5)
+            time.sleep(0.05)
 
             if not self.check.isChecked():
                 break
 
 
-class MyServer(BaseHTTPRequestHandler):
+class Server(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
-        self.wfile.write(bytes(str(pulse), 'utf8'))
+        self.wfile.write(bytes(str(pulse), "utf8"))
 
 
 def start_server():
-    web_server = HTTPServer(("localhost", 8080), MyServer)
+    web_server = HTTPServer((SERVER_NAME, SERVER_PORT), Server)
     print("Server started.")
 
     try:
@@ -97,7 +106,7 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 
-    window = App()
+    window = GUI()
     window.show()
 
     app.exec()
