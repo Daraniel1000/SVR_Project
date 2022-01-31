@@ -42,7 +42,12 @@ void UCustomNodes::FetchPlayerPulse(int32& pulse)
 
 	request->OnProcessRequestComplete().BindLambda(
 		[&](FHttpRequestPtr request, FHttpResponsePtr response, bool success) -> void {
-			pulse = std::stoi(TCHAR_TO_UTF8(*response->GetContentAsString()));
+			if (success) {
+				pulse = std::stoi(TCHAR_TO_UTF8(*response->GetContentAsString()));
+			}
+			else {
+				pulse = MAX_PULSE;
+			}
 		});
 
 	request->ProcessRequest();
